@@ -22,6 +22,8 @@ function Login() {
   return (
     <div className="size-login">
       <form className="container box-login" onSubmit={handleSubmit(onSubmit)}>
+        <h2 className="m-0">Iniciar Sesión</h2>
+        <hr className="mt-0 mb-2"/>
         <div className="pt-2 form-group">
           <h5 className="ps-2">Correo electrónico</h5>
           <input type="email" className="form-control" placeholder="example@example.com" name="email" {...register("email", { required: true })} />

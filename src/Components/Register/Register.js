@@ -15,7 +15,11 @@ function Register() {
     if(register?.errors) setregisterErrors(register.errors)
     if(register.token) {
       swal("¡Buen trabajo!","Usuario creado con éxito","success")
-      window.location.replace('')
+      .then((confirm) => {
+        if (confirm) {
+          window.location.replace('/login')
+        }
+      })
     }
   }
 
@@ -23,6 +27,8 @@ function Register() {
   return (
     <div className="size-register">
       <form className="container box-register" onSubmit={handleSubmit(onSubmit)}>
+        <h2 className="m-0">Registrarse</h2>
+        <hr className="mt-0 mb-2"/>
         <div className="mx-auto pt-2 form-group">
           <h5 className="ps-2">Usuario</h5>
           <input type="text" className="form-control"  minLength='5' maxLength='15' placeholder="Nombe de usuario" name="username" {...register("username", {required: true, minLength:5, maxLength:15})} />

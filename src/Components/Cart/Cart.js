@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import swal from 'sweetalert';
 
-function MainCart() {
+function Cart() {
   const [carrito, setCarrito] = useState([]);
   const [change, setChange] = useState(false);
 
@@ -15,27 +15,15 @@ function MainCart() {
     auxcarrito.forEach((item) => {
       if (item._id === id) {
         if (sign === "+") {
-          if (item.stock === 1) {
-            swal({
-              icon: 'error',
-              title: 'Stock insuficiente',
-              text: `De momento no contamos con esa cantidad!`,
-              confirmButtonColor : "#0B5ED7",
-            })
-          } else {
+          if (item.stock === 1) swal({icon: 'error', title: 'Stock insuficiente', text: `De momento no contamos con esa cantidad!`})
+          else {
             item.quantity = item.quantity+1;
             item.stock= item.stock-1;
           }
             
         } else {
-          if (item.quantity === 1) {
-            swal({
-              icon: 'error',
-              title: 'Opps...',
-              text: `No puede llevar menos de un articulo`,
-              confirmButtonColor : "#0B5ED7",
-            })
-          } else {
+          if (item.quantity === 1) swal({icon: 'error',title: 'Opps...', text: `No puede llevar menos de un articulo`})
+           else {
             item.quantity = item.quantity-1;
             item.stock= item.stock+1;
           }
@@ -105,7 +93,9 @@ function MainCart() {
       }
       {carrito?.length > 0?
       <div className='d-flex justify-content-center mt-5'>
-        <Link exact to='/cart/purchase' className='align-self-center btn btn-success' id='continuebutton'>Continuar compra</Link>
+        <Link exact to='/home' className='align-self-center btn btn-secondary mx-1' id='continuebutton'>Continuar comprando</Link>
+        <Link exact to='/cart/purchase' className='align-self-center btn btn-success mx-1' id='continuebutton'>Pagar</Link>
+
       </div>
       : null
       }
@@ -113,4 +103,4 @@ function MainCart() {
   )
 }
 
-export default MainCart
+export default Cart

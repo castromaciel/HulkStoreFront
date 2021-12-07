@@ -1,5 +1,5 @@
 import React from 'react'
-import MainCart from '../Components/Cart/MainCart'
+import Cart from '../Components/Cart/Cart'
 import Header from '../Components/Header/Header'
 import SideBar from '../Components/SideBar/SideBar'
 
@@ -10,7 +10,7 @@ function CartPage() {
       <div className="container-fluid">
         <div className="row">
           <SideBar />
-          <MainCart />
+          <Cart />
         </div>
       </div>
     </div>

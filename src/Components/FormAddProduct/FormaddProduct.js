@@ -9,12 +9,12 @@ function FormAddProduct({token}) {
   const onSubmit = async(data) => {
     data.token = token
     await addNewProduct(data).then(res => res)
-    swal('Producto Agregado con éxito!')
+    swal({icon:'success', title:'¡Éxito!', text:'Producto Agregado con éxito!'})
     reset()
   }
 
   return (
-    <div className="col-md-9 me-sm-auto col-lg-10 px-md-4">
+    <div className="col-md-9 me-sm-auto col-lg-10 px-md-4 pb-5">
       <h1 className="text-center">Agregar Productos al Inventario</h1>
       <hr />
       <form className="row justify-content-center" onSubmit={handleSubmit(onSubmit)} noValidate>

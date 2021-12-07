@@ -16,14 +16,13 @@ function Inventory({token}) {
   }, [token])
 
   return (
-    <div className="mt-2 col-md-9 me-sm-auto col-lg-10 px-md-4">
+    <div className="mt-2 col-md-9 me-sm-auto col-lg-10 px-md-4 pb-5">
       {loading? 
       <Spinner />
       :  
       <div>
         <div className="d-flex justify-content-between">
           <h1>Inventario de productos</h1>
-          <h2><i className="bi bi-pencil-square"></i></h2>
         </div>
         <hr/>
         <div className="table-responsive">

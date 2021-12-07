@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 import { buyCart } from '../../Services/Cart/buyCart';
 
-
 function ResumeCart({token}) {
 
   const cartforuse = localStorage.getItem('cart');
@@ -19,14 +18,13 @@ function ResumeCart({token}) {
     const status = await buyCart(purchase).then(res => res)
     console.log(status)
     if(status === 204) {
-      swal({
-        icon: 'success',
-        title: '¡Compra exitosa!',
-        text: 'Se descontará de tu sueldo',
-        confirmButtonColor : "#0B5ED7",
+      swal({ icon: 'success', title: '¡Compra exitosa!', text: 'Se descontará de tu saldo' })
+      .then((confirm) => {
+        if (confirm) {
+          localStorage.setItem('cart', JSON.stringify([]))
+          window.location.replace('/home')
+        }
       })
-      localStorage.setItem('cart', JSON.stringify([]))
-      window.location.replace('/home')
     }
   }
   
@@ -50,7 +48,7 @@ function ResumeCart({token}) {
   }, [])
 
   return (
-    <div className='mt-2 col-md-9 me-sm-auto col-lg-10 px-md-4'>
+    <div className='mt-2 col-md-9 me-sm-auto col-lg-10 px-md-4 pb-5'>
       <form onSubmit={handleSubmit(onSubmit)} className='d-flex flex-column p-3 mx-3'>
         <div className='col-md-12'>
           <h1 className='text-center my-4'>Resumen de cuenta</h1>

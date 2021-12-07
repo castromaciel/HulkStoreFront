@@ -16,22 +16,11 @@ function Products({token}) {
 
     const filter = getLocal.findIndex((x) => x._id === data._id)
     item.quantity ++
-    if (filter !== -1) swal({
-      icon: 'error',
-      title: 'Opps...',
-      text: 'El producto ya se encuentra en su carrito',
-      confirmButtonColor : "#0B5ED7",
-    })
+    if (filter !== -1) swal({ icon: 'error', title: 'Opps...',text: 'El producto ya se encuentra en su carrito' })
     else {
       getLocal.push(item)
-      swal({
-        icon: 'success',
-        title: '¡Eureca!',
-        text: 'Producto agregado con éxito',
-        confirmButtonColor : "#0B5ED7",
-      })
+      swal({ icon: 'success', title: '¡Eureca!',text: 'Producto agregado con éxito' })
     }
-
     localStorage.setItem('cart', JSON.stringify(getLocal))
   }
 
@@ -43,23 +32,23 @@ function Products({token}) {
     })
   }, [token])
 
-
   return (
-    <div className="mt-2 col-md-9 me-sm-auto col-lg-10 px-md-4">
+    <div className="mt-2 col-md-9 me-sm-auto col-lg-10 px-md-4 pb-5">
       {loading?
         <Spinner />
         :
         <div>
-          <h1 className="text-center">Nuestros productos!</h1>
+          <h1 className="text-center mb-5">Nuestros productos!</h1>
           <div className="row justify-content-center row-cols-1 row-cols-lg-2 g-4">
             {products.map(p => 
             <div className="col" key={p._id}>
-              <div className="card d-flex flex-column">
+              <div className="card-blured d-flex flex-column">
                 <img src={p.imgURL} className="card-img-top align-self-center" alt={p.name} />
                 <div className="card-body">
-                  <h5 className="card-title text-truncate" title={p.name}>{p.name}</h5>
-                  <h6>Precio: ${p.price}</h6>
-                  <div className="w-100 d-flex justify-content-end">
+                  <h4 className="card-title text-truncate" title={p.name}>{p.name}</h4>
+                  <hr />
+                  <div className="w-100 d-flex justify-content-between">
+                  <h4>${p.price}</h4>
                     {p.stock > 0 ? 
                     <button className="btn btn-success" onClick={() => {setLocalStorage(p)}}><i className="bi bi-cart me-2"></i>Añadir</button>
                     :
