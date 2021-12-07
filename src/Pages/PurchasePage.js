@@ -1,20 +1,22 @@
 import React from 'react'
-import MainCart from '../Components/Cart/MainCart'
 import Header from '../Components/Header/Header'
+import ResumeCart from '../Components/ResumeCart/ResumeCart'
 import SideBar from '../Components/SideBar/SideBar'
 
-function CartPage() {
+function PurchasePage() {
+  const token = JSON.parse(localStorage.getItem('token'))
+
   return (
     <div>
       <Header />
       <div className="container-fluid">
         <div className="row">
           <SideBar />
-          <MainCart />
+          <ResumeCart token={token}/>
         </div>
       </div>
     </div>
   )
 }
 
-export default CartPage
+export default PurchasePage

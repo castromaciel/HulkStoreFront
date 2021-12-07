@@ -2,12 +2,38 @@ import React,{useEffect, useState} from 'react'
 import './products.css'
 import { getAllProducts } from '../../Services/Products/getAllProducts';
 import Spinner from '../Spinner/Spinner';
-
+import swal from 'sweetalert';
 
 function Products({token}) {
 
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(false)
+
+  const setLocalStorage = (data) =>{
+    const item = data;
+    const getLocal = JSON.parse(localStorage.getItem('cart'))
+    if(!getLocal) localStorage.setItem('cart', "[]")
+
+    const filter = getLocal.findIndex((x) => x._id === data._id)
+    item.quantity ++
+    if (filter !== -1) swal({
+      icon: 'error',
+      title: 'Opps...',
+      text: 'El producto ya se encuentra en su carrito',
+      confirmButtonColor : "#0B5ED7",
+    })
+    else {
+      getLocal.push(item)
+      swal({
+        icon: 'success',
+        title: '¡Eureca!',
+        text: 'Producto agregado con éxito',
+        confirmButtonColor : "#0B5ED7",
+      })
+    }
+
+    localStorage.setItem('cart', JSON.stringify(getLocal))
+  }
 
   useEffect(() => {
     setLoading(true);
@@ -34,7 +60,11 @@ function Products({token}) {
                   <h5 className="card-title text-truncate" title={p.name}>{p.name}</h5>
                   <h6>Precio: ${p.price}</h6>
                   <div className="w-100 d-flex justify-content-end">
-                    <button className="btn btn-success"><i className="bi bi-cart me-2"></i>Añadir</button>
+                    {p.stock > 0 ? 
+                    <button className="btn btn-success" onClick={() => {setLocalStorage(p)}}><i className="bi bi-cart me-2"></i>Añadir</button>
+                    :
+                    <button className="btn btn-danger"><i className="bi bi-cart me-2"></i>No Stock</button>
+                  }
                   </div>
                 </div>
               </div>

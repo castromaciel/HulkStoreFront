@@ -38,7 +38,7 @@ function Inventory({token}) {
             </thead>
             <tbody>
               {
-                products.map(p =>(
+                products?.map(p =>(
                   <tr key={p._id}>
                     <th className="text-truncate">{p._id}</th>
                     <td>{p.name}</td>
