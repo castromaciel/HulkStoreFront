@@ -1,12 +1,15 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
+import swal from 'sweetalert';
 import { addNewProduct } from '../../Services/Products/addNewProduct';
 
-function FormAddProduct() {
+function FormAddProduct({token}) {
 
-  const { register, handleSubmit, formState: {errors}, reset } = useForm({ defaultValues: { name: "", price: "", imgURL:"", stock:""} });
-  const onSubmit = (data) => {
-    addNewProduct(data).then(alert("Producto agregado con exito"))
+  const { register, handleSubmit, formState: {errors}, reset  } = useForm({ defaultValues: { name: "", price: "", imgURL:"", stock:""} });
+  const onSubmit = async(data) => {
+    data.token = token
+    await addNewProduct(data).then(res => res)
+    swal('Producto Agregado con éxito!')
     reset()
   }
 

@@ -2,18 +2,18 @@ import React, { useEffect,useState } from 'react'
 import { getAllProducts } from '../../Services/Products/getAllProducts'
 import Spinner from '../Spinner/Spinner'
 
-function Inventory() {
+function Inventory({token}) {
 
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     setLoading(true);
-    getAllProducts().then((data) => {
+    getAllProducts(token).then((data) => {
       setProducts(data)
       setLoading(false)
     })
-  }, [])
+  }, [token])
 
   return (
     <div className="mt-2 col-md-9 me-sm-auto col-lg-10 px-md-4">

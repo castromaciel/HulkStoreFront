@@ -1,14 +1,22 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
+import { NavLink } from 'react-router-dom';
+import { signIn } from '../../Services/Users/signIn';
 import './login.css'
 
 function Login() {
- // eslint-disable-next-line
+
   const[validInputs, setValidInputs] = useState(true)
   const { register, handleSubmit, formState: {errors} } = useForm({ defaultValues: { email: "", password: ""} });
 
-  const onSubmit = (data) => {
-    console.log(data)
+  const onSubmit = async (data) => {
+    const login = await signIn(data)
+    if (login.token) {
+      localStorage.setItem('user', JSON.stringify(login.userFound));
+      localStorage.setItem('token', JSON.stringify(login.token));
+      window.location.replace('/home')
+    }
+    else setValidInputs(false)
   }
 
   return (
@@ -30,6 +38,7 @@ function Login() {
           </div>
         )}
         <div className="mx-auto pt-2 form-group d-flex justify-content-end">
+          <NavLink to='/register' className="mt-2 me-2 btn btn-outline-success" > Registrarse </NavLink>
           <input type="submit" className="mt-2 btn btn-outline-dark-blue" value="Iniciar sesión" />
         </div>
       </form>

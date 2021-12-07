@@ -4,13 +4,15 @@ import Inventory from '../Components/Inventory/Inventory'
 import Header from '../Components/Header/Header'
 
 function InventoryPAge() {
+  const token = JSON.parse(localStorage.getItem('token'))
+
   return (
     <div>
       <Header />
       <div className="container-fluid">
         <div className="row">
           <SideBar />
-          <Inventory/>
+          <Inventory token={token}/>
         </div>
       </div>
     </div>
